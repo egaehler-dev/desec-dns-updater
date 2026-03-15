@@ -1,0 +1,12 @@
+services:
+  ddns-updater:
+    image: desec-dns-updater:latest
+    build: .
+    container_name: ddns-updater
+    environment:
+      - DESEC_TOKEN=your_token_here
+      - DESEC_ZONE=your_domain.net
+      - DESEC_HOSTS=["subdomain1", "subdomain2", "*"]
+    volumes:
+      - ./data:/data
+    restart: unless-stopped
