@@ -10,9 +10,18 @@ A Lightweight Dockerized Bash script for updating deSEC.io dynamic DNS records w
 * A [deSEC.io](https://desec.io) account and API Token.
 * Docker & Docker Compose installed on your host.
 
-### 📦 Setup & Installation
+### 🚀 Quick Start (Pre-built Image)
+You don't need to clone this repo. Just create a `docker-compose.yml`:
 
-1. **Clone this repository:**
-   ```bash
-   git clone [https://github.com/egaehler/desec-dns-updater.git](https://github.com/YOUR_USERNAME/desec-dns-updater.git)
-   cd desec-dns-updater
+```yaml
+services:
+  ddns-updater:
+    image: ghcr.io/egaehler-dev/desec-dns-updater:latest
+    container_name: ddns-updater
+    environment:
+      - DESEC_TOKEN=your_token_here
+      - DESEC_ZONE=your_domain.com
+      - DESEC_HOSTS=["@","*"]
+    volumes:
+      - ./data:/data
+    restart: unless-stopped
